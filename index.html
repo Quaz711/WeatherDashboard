@@ -2,27 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scaLe=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css">
     <title>Weather Dashboard</title>
 </head>
 
 <body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+
     <div class="city-search conatiner">
         <div class="row">
             <div class="col-4">
                 <div class="card">
-                    <h1>Search for a city:</h1>
+                    <h2>Search for a city:</h2>
 
                     <form id="search-box" class="card-body">
-                        <label></label>
-                        <input name="city-name" size="20" id="city-name" type="text" autofocus="true">
-                        <button class="button btn-lg" type="submit">Search</button>
+                        <input name="city-name" size="40" id="city-name" type="text" autofocus="true">
+                        <button class="btn btn-md" type="submit">Search</button>
                     </form>
+
+                    <ul class="list-group" id="searched-cities"></ul>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="card bg-blue">
+                    <div class="current-weather">
+                        <span id="display-city"></span>
+                        <span id="display-date"></span>
+                        <img id="display-icon"></img>
+                        <div class="weather-container" class="list-group"></div>
+                    </div>
+
+                    <div class="weather-results">
+                        <p class="temp">Temp: <span id="temp-results"></span></p>
+                        <p class="wind">Wind: <span id="wind-results"></span></p>
+                        <p class="humidity">Humidity: <span id="humidity-results"></span></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3>5-Day Forecast:</h3>
+                </div>
+
+                <div class="row" id="five-day-forecast">
+                    <div class="card col-2 text-wite" id="first">
+                        <p class="first-card" id="first-date"></p>
+                        <img id="first-icon"></img>
+                        <p class="first-card" id="first-temp">Temp: </p>
+                        <p class="first-card" id="first-humidity">Humidity: </p>
+                    </div>
+
+                    <div class="card col-2 text-wite" id="second">
+                        <p class="second-card" id="second-date"></p>
+                        <img id="second-icon"></img>
+                        <p class="second-card" id="second-temp">Temp: </p>
+                        <p class="second-card" id="second-humidity">Humidity: </p>
+                    </div>
+
+                    <div class="card col-2 text-wite" id="third">
+                        <p class="third-card" id="third-date"></p>
+                        <img id="third-icon"></img>
+                        <p class="third-card" id="third-temp">Temp: </p>
+                        <p class="third-card" id="third-humidity">Humidity: </p>
+                    </div>
+
+                    <div class="card col-2 text-wite" id="fourth">
+                        <p class="fourth-card" id="fourth-date"></p>
+                        <img id="fourth-icon"></img>
+                        <p class="fourth-card" id="fourth-temp">Temp: </p>
+                        <p class="fourth-card" id="fourth-humidity">Humidity: </p>
+                    </div>
+
+                    <div class="card col-2 text-wite" id="fifth">
+                        <p class="fifth-card" id="fifth-date"></p>
+                        <img id="fifth-icon"></img>
+                        <p class="fifth-card" id="fifth-temp">Temp: </p>
+                        <p class="fifth-card" id="fifth-humidity">Humidity: </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="./assets/script.js"></script>
 </body>
 </html>

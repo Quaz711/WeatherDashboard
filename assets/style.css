@@ -3,8 +3,21 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+header {
+    text-align: center;
+    background-color: blue;
+    padding: 10px 10px;
+    border-radius: 18px;
+    color: white;
+    margin: 10px;
+}
+
 h1 {
     margin: 10px;
+}
+
+h2, h3 {
+    margin: 20px;
 }
 
 .city-search {
@@ -19,7 +32,10 @@ h1 {
     background-color: lightblue;
 }
 
-.button {
-    background-color: lightblue;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+.btn {
+    background-color: white;
+}
+
+#five-day-forecast {
+    justify-content: space-around;
 }
