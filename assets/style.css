@@ -16,8 +16,13 @@ h1 {
     margin: 10px;
 }
 
-h2, h3 {
+h2 {
     margin: 20px;
+}
+
+h3 {
+    text-align: left;
+    padding: 10px 10px;
 }
 
 .city-search {
@@ -37,5 +42,9 @@ h2, h3 {
 }
 
 #five-day-forecast {
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.weather-results {
+    padding: 20px 20px;
 }
