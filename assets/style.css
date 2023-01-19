@@ -1,0 +1,25 @@
+body {
+    background: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h1 {
+    margin: 10px;
+}
+
+.city-search {
+    margin: 150px auto;
+    background-color: white;
+    padding: 50px 50px;
+    border-radius: 18px;
+    opacity: 80%;
+}
+
+.card {
+    background-color: lightblue;
+}
+
+.button {
+    background-color: lightblue;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
