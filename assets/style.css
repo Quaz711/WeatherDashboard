@@ -25,6 +25,11 @@ h3 {
     padding: 10px 10px;
 }
 
+li:hover {
+    cursor: pointer;
+    background-color: aqua;
+}
+
 .city-search {
     margin: 150px auto;
     background-color: white;
