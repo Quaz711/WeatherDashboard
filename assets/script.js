@@ -52,6 +52,7 @@ var getWeather = function(city) { //Function that is called when user has entere
 };
 
 var displayWeather = function(city, data) { //Function that is called when user has entered or selected a city and we need to display the weather for that city
+    removeClass(); //Calls the removeClass function that removes the background and allows a new background to be used
     let cityCaps = city.split(" "); //Takes the city passed in and splits it up by spaces and puts it into an array
     for (let i=0; i < cityCaps.length; i++) { //For loop runs for the length of the city's array
         cityCaps[i] = cityCaps[i][0].toUpperCase() + cityCaps[i].substr(1); //Capitalizes the first letter in each word entered
@@ -240,6 +241,10 @@ var display5DayForecast = function(data) { //Function that is called when user h
         var cardHumidity = document.querySelector("#humidity" + i); //Link to html id put into variable form to be used later on for easy access
         cardHumidity.textContent = data[i-1].main.humidity + "%"; //Displays current forecast's humidity
     }
+};
+
+var removeClass = function() { //Function that is called when the background needs to be removed so a new background can be used
+    document.body.classList.remove("dawn", "sunny", "dusk", "night", "rain", "snow", "cloudy", "drizzle", "thunderstorm", "earth"); //Removes background so new background can be applied
 };
 
 searchBox.addEventListener("submit", submitButton); //Listens to see if a user has clicked the submit button
