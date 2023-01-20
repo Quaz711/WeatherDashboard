@@ -35,7 +35,7 @@ li:hover {
     background-color: white;
     padding: 50px 50px;
     border-radius: 18px;
-    opacity: 80%;
+    opacity: 65%;
 }
 
 .card {
@@ -52,4 +52,64 @@ li:hover {
 
 .weather-results {
     padding: 20px 20px;
+}
+
+.cloudy {
+    background: url("./images/weather/cloudy.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.dawn {
+    background: url("./images/weather/dawn.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.dusk {
+    background: url("./images/weather/dusk.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.night {
+    background: url("./images/weather/night.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rain {
+    background: url("./images/weather/rain.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.snow {
+    background: url("./images/weather/snow.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sunny {
+    background: url("./images/weather/sunny.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.drizzle {
+    background: url("./images/weather/drizzle.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.thunderstorm {
+    background: url("./images/weather/thunderstorm.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.earth {
+    background: url("./images/weather/earth.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }

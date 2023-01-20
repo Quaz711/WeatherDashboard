@@ -70,6 +70,144 @@ var displayWeather = function(city, data) { //Function that is called when user 
     listHTML.textContent = city; //Displays the entered/selected city so it can be easily searched again by being clicked
     listHTML.addEventListener("click", previouslySearched); //Creates an element to the city that was entered into the previously searched list so it can be clicked
     searchedCities.appendChild(listHTML); //Adds the city to the child so its part of the html
+    var time = moment().tz(city).format("HH"); //Gets the time for the timezone in military hour for background
+
+    if (!time) { //If timezone won't pull data then just grab local time
+        time = moment().format("HH"); //Assign the local time to a variable to be used later on
+    }
+    
+    var raining = false; //A boolean to see the weather condition
+    var cloudy = false; //A boolean to see the weather condition
+    var snowing = false; //A boolean to see the weather condition
+    var clear = false; //A boolean to see the weather condition
+    var thunderstorming = false; //A boolean to see the weather condition
+    var drizzling = false; //A boolean to see the weather condition
+
+    if (data.weather[0].main == "Clouds") { //Checks the weather condition in the city that was searched
+        console.log("Entered Clouds"); //Console log of condition met
+        raining = false; //Changes the boolean of the weather condition according to what the api returned
+        cloudy = true; //Changes the boolean of the weather condition according to what the api returned
+        snowing = false; //Changes the boolean of the weather condition according to what the api returned
+        clear = false; //Changes the boolean of the weather condition according to what the api returned
+        thunderstorming = false; //Changes the boolean of the weather condition according to what the api returned
+        drizzling = false; //Changes the boolean of the weather condition according to what the api returned
+    }
+
+    else if (data.weather[0].main == "Rain") { //Checks the weather condition in the city that was searched
+        console.log("Entered Rain"); //Console log of condition met
+        raining = true; //Changes the boolean of the weather condition according to what the api returned
+        cloudy = false; //Changes the boolean of the weather condition according to what the api returned
+        snowing = false; //Changes the boolean of the weather condition according to what the api returned
+        clear = false; //Changes the boolean of the weather condition according to what the api returned
+        thunderstorming = false; //Changes the boolean of the weather condition according to what the api returned
+        drizzling = false; //Changes the boolean of the weather condition according to what the api returned
+    }
+
+    else if (data.weather[0].main == "Snow") { //Checks the weather condition in the city that was searched
+        console.log("Entered Snow"); //Console log of condition met
+        raining = false; //Changes the boolean of the weather condition according to what the api returned
+        cloudy = false; //Changes the boolean of the weather condition according to what the api returned
+        snowing = true; //Changes the boolean of the weather condition according to what the api returned
+        clear = false; //Changes the boolean of the weather condition according to what the api returned
+        thunderstorming = false; //Changes the boolean of the weather condition according to what the api returned
+        drizzling = false; //Changes the boolean of the weather condition according to what the api returned
+    }
+
+    else if (data.weather[0].main == "Clear") { //Checks the weather condition in the city that was searched
+        console.log("Entered Clear"); //Console log of condition met
+        raining = false; //Changes the boolean of the weather condition according to what the api returned
+        cloudy = false; //Changes the boolean of the weather condition according to what the api returned
+        snowing = false; //Changes the boolean of the weather condition according to what the api returned
+        clear = true; //Changes the boolean of the weather condition according to what the api returned
+        thunderstorming = false; //Changes the boolean of the weather condition according to what the api returned
+        drizzling = false; //Changes the boolean of the weather condition according to what the api returned
+    }
+
+    else if (data.weather[0].main == "Drizzle") { //Checks the weather condition in the city that was searched
+        console.log("Entered Drizzle"); //Console log of condition met
+        raining = false; //Changes the boolean of the weather condition according to what the api returned
+        cloudy = false; //Changes the boolean of the weather condition according to what the api returned
+        snowing = false; //Changes the boolean of the weather condition according to what the api returned
+        clear = false; //Changes the boolean of the weather condition according to what the api returned
+        thunderstorming = false; //Changes the boolean of the weather condition according to what the api returned
+        drizzling = true; //Changes the boolean of the weather condition according to what the api returned
+    }
+
+    else if (data.weather[0].main == "Thunderstorm") { //Checks the weather condition in the city that was searched
+        console.log("Entered Thunderstorm"); //Console log of condition met
+        raining = false; //Changes the boolean of the weather condition according to what the api returned
+        cloudy = false; //Changes the boolean of the weather condition according to what the api returned
+        snowing = false; //Changes the boolean of the weather condition according to what the api returned
+        clear = false; //Changes the boolean of the weather condition according to what the api returned
+        thunderstorming = true; //Changes the boolean of the weather condition according to what the api returned
+        drizzling = false; //Changes the boolean of the weather condition according to what the api returned
+    }
+
+    else { //Enters if none of the weather condition in the city that was searched matched
+        console.log("Entered First Else"); //Console log of condition met
+        raining = false; //Changes the boolean of the weather condition according to what the api returned
+        cloudy = false; //Changes the boolean of the weather condition according to what the api returned
+        snowing = false; //Changes the boolean of the weather condition according to what the api returned
+        clear = true; //Changes the boolean of the weather condition according to what the api returned
+        thunderstorming = false; //Changes the boolean of the weather condition according to what the api returned
+        drizzling = false; //Changes the boolean of the weather condition according to what the api returned
+    }
+
+    if (clear) {
+        console.log("Entered Clear Is True"); //Console log of condition met
+        if (time >= 6 && time < 8) { //Checks to see if condtions are met for the weather condition
+            console.log("Entered Dawn"); //Console log of condition met
+            document.body.classList.add("dawn"); //Calls the css class given to change the background according to the weather condition
+        }
+    
+        if (time >= 8 && time < 18) { //Checks to see if condtions are met for the weather condition
+            console.log("Entered Sunny"); //Console log of condition met
+            document.body.classList.add("sunny"); //Calls the css class given to change the background according to the weather condition
+        }
+    
+        if (time >= 18 && time < 20) { //Checks to see if condtions are met for the weather condition
+            console.log("Entered Dusk"); //Console log of condition met
+            document.body.classList.add("dusk"); //Calls the css class given to change the background according to the weather condition
+        }
+    
+        if (time >= 20 || time < 6) { //Checks to see if condtions are met for the weather condition
+            console.log("Entered Night"); //Console log of condition met
+            document.body.classList.add("night"); //Calls the css class given to change the background according to the weather condition
+        }
+    }
+
+    else { //Enters if none of the weather condition in the city that was searched matched
+        console.log("Entered Second Else"); //Console log of condition met
+        if (raining) { //Checks to see if condtions are true for the weather condition
+            console.log("Entered Is Raining"); //Console log of condition met
+            document.body.classList.add("rain"); //Calls the css class given to change the background according to the weather condition
+        }
+    
+        else if (snowing) { //Checks to see if condtions are true for the weather condition
+            console.log("Entered Is Snowing"); //Console log of condition met
+            document.body.classList.add("snow"); //Calls the css class given to change the background according to the weather condition
+        }
+    
+        else if (cloudy) { //Checks to see if condtions are true for the weather condition
+            console.log("Entered Is Cloudy"); //Console log of condition met
+            document.body.classList.add("cloudy"); //Calls the css class given to change the background according to the weather condition
+        }
+
+        else if (drizzling) { //Checks to see if condtions are true for the weather condition
+            console.log("Entered Is Drizzling"); //Console log of condition met
+            document.body.classList.add("drizzle"); //Calls the css class given to change the background according to the weather condition
+        }
+
+        else if (thunderstorming) { //Checks to see if condtions are true for the weather condition
+            console.log("Entered Is Thunderstorming"); //Console log of condition met
+            document.body.classList.add("thunderstorm"); //Calls the css class given to change the background according to the weather condition
+        }
+
+        else { //Enters if none of the weather condition in the city that was searched matched
+            console.log("Entered Earth"); //Console log of condition met
+            document.body.classList.add("earth"); //Calls the css class given to change the background according to the weather condition
+        }
+    }
 };
 
 var get5DayForecast = function(city) { //Function that is called when user has entered or selected a city and we need to get the five day forecast for that city
