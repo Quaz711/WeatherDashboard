@@ -12,15 +12,27 @@ var tempResults = document.querySelector("#temp-results"); //Link to html id put
 var windResults = document.querySelector("#wind-results"); //Link to html id put into variable form to be used later on for easy access
 var humidityResults = document.querySelector("#humidity-results"); //Link to html id put into variable form to be used later on for easy access
 
+var uponOpen = function() { //Function that runs every time the webpage is visited
+    if (localStorage.length != 0) { //checks to see if the length of the localstorage is not zero
+        storedCities = JSON.parse(localStorage.getItem('City')); //Turn the string back into an object
+        for (let i=0; i < storedCities.length; i++) { //Goes through the object array to display all saved cities in the localstorage
+            createSearchedCities(storedCities[i]); //Calls the function to display localstorage saved cities
+        }
+    }
+};
+
 var submitButton = function(event) { //Function that is called when the submit button is clicked
     event.preventDefault(); //Prevents the default from happening in case user has not input a city
     var city = cityName.value.trim(); //used in case user has entered spaces before or after the city to refrain from errors from occurring
     if (city) { //Happens if a user entered a valid entry
+        let cityCaps = city.split(" "); //Takes the city passed in and splits it up by spaces and puts it into an array
+        for (let i=0; i < cityCaps.length; i++) { //For loop runs for the length of the city's array
+            cityCaps[i] = cityCaps[i][0].toUpperCase() + cityCaps[i].substr(1); //Capitalizes the first letter in each word entered
+        }
+        
+        city = cityCaps.join(" "); //Joins the city's array back togther and puts it back into a string
         getWeather(city); //Calls the getWeahter function to get the weather for the entered city
         get5DayForecast(city); //Calls the get5DayForecast function to get the weather forecast for five days for the entered city
-        storedCities.push(city); //Adds the searched city into the storedCities array for quick reference
-        localStorage.setItem("City", JSON.stringify(storedCities));
-        cityName.value = ""; //Clears the entry the user entered into the search field
     }
 
     else { //Happens if a user entered an invalid entry
@@ -51,14 +63,24 @@ var getWeather = function(city) { //Function that is called when user has entere
     });
 };
 
+var createSearchedCities = function (city) { //Function that displayes the searched cities
+    var listHTML = document.createElement("li"); //Creates a HTML list in the index.html and stores it into a variable to be utilized for displaying the entered/selected city
+    listHTML.className = "list-group-item"; //Gives the created HTML list a class for styling purposes
+    listHTML.textContent = city; //Displays the entered/selected city so it can be easily searched again by being clicked
+    listHTML.addEventListener("click", previouslySearched); //Creates an element to the city that was entered into the previously searched list so it can be clicked
+    searchedCities.appendChild(listHTML); //Adds the city to the child so its part of the html
+};
+
 var displayWeather = function(city, data) { //Function that is called when user has entered or selected a city and we need to display the weather for that city
     removeClass(); //Calls the removeClass function that removes the background and allows a new background to be used
-    let cityCaps = city.split(" "); //Takes the city passed in and splits it up by spaces and puts it into an array
-    for (let i=0; i < cityCaps.length; i++) { //For loop runs for the length of the city's array
-        cityCaps[i] = cityCaps[i][0].toUpperCase() + cityCaps[i].substr(1); //Capitalizes the first letter in each word entered
+    const found = storedCities.find(element => element === city); //Checks the soredCities array to see if inputed city has been searched already
+    if (!found) { //If searched citty has not been searched previously then continue
+        createSearchedCities(city); //Call the function that creates the searched city list and pass the new searched city
     }
-    
-    city = cityCaps.join(" "); //Joins the city's array back togther and puts it back into a string
+
+    storedCities.push(city); //Adds the searched city into the storedCities array for quick reference
+    localStorage.setItem("City", JSON.stringify(storedCities));
+    cityName.value = ""; //Clears the entry the user entered into the search field
     weatherContainer.textContent = ""; //Clears previous searched city's displayed information
     displayCity.textContent = city; //Displays current city's name
     displayDate.textContent = moment().format("(L)"); //Displays current city's date
@@ -66,11 +88,6 @@ var displayWeather = function(city, data) { //Function that is called when user 
     tempResults.textContent = Math.round(data.main.temp) + " °F"; //Displays current city's temperature
     windResults.textContent = data.wind.speed + " MPH"; //Displays current city's wind speed
     humidityResults.textContent = data.main.humidity + "%"; //Displays current city's humidity
-    var listHTML = document.createElement("li"); //Creates a HTML list in the index.html and stores it into a variable to be utilized for displaying the entered/selected city
-    listHTML.className = "list-group-item"; //Gives the created HTML list a class for styling purposes
-    listHTML.textContent = city; //Displays the entered/selected city so it can be easily searched again by being clicked
-    listHTML.addEventListener("click", previouslySearched); //Creates an element to the city that was entered into the previously searched list so it can be clicked
-    searchedCities.appendChild(listHTML); //Adds the city to the child so its part of the html
     var time = moment().tz(city).format("HH"); //Gets the time for the timezone in military hour for background
 
     if (!time) { //If timezone won't pull data then just grab local time
@@ -248,3 +265,5 @@ var removeClass = function() { //Function that is called when the background nee
 };
 
 searchBox.addEventListener("submit", submitButton); //Listens to see if a user has clicked the submit button
+
+uponOpen(); //Call the function to load the saved searched cities from localstorage
